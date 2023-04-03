@@ -1,0 +1,15 @@
+[user]
+  name = Max P Haley
+  email = maxphaley@users.noreply.github.com
+[push]
+  default = simple
+[core]
+  pager = less -FRX
+[init]
+  defaultBranch = main
+[alias]
+  br = branch
+  co = checkout
+  ci = commit
+  st = status
+  lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit

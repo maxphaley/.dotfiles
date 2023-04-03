@@ -1,0 +1,8 @@
+VIM="nvim"
+
+alias vim=$VIM
+
+GIT_EDITOR=$VIM
+
+setopt auto_pushd
+
