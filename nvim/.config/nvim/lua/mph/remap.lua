@@ -18,6 +18,14 @@ vim.o.ignorecase = true
 vim.o.smartcase = true
 vim.o.hlsearch = false
 vim.o.incsearch = true
+vim.cmd [[
+  augroup vimrc-incsearch-highlight
+    autocmd!
+    autocmd CmdlineEnter /,\? :set hlsearch
+    autocmd CmdlineLeave /,\? :set nohlsearch
+  augroup end
+]]
+
 vim.o.mouse = 'a'
 
 vim.o.termguicolors = true
@@ -29,6 +37,13 @@ vim.o.timeoutlen = 300
 
 vim.wo.number = true
 vim.wo.relativenumber = true
+vim.cmd [[
+  augroup relative-number-toggle
+    autocmd!
+    autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu && mode() != "i" | set rnu   | endif
+    autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu                  | set nornu | endif
+  augroup end
+]]
 vim.wo.signcolumn = 'yes'
 
 vim.keymap.set('n', '<leader>pv', vim.cmd.Ex)
