@@ -26,6 +26,13 @@ vim.cmd [[
   augroup end
 ]]
 
+vim.cmd [[
+  augroup auto-close-empty-unmodified-bufs
+    autocmd!
+    autocmd BufLeave {} if empty(bufname()) && !&modified | set bufhidden=wipe | endif
+  augroup end
+]]
+
 vim.o.mouse = 'a'
 
 vim.o.termguicolors = true
@@ -46,8 +53,10 @@ vim.cmd [[
 ]]
 vim.wo.signcolumn = 'yes'
 
-vim.keymap.set('n', '<leader>pv', vim.cmd.Ex)
-vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', {silent = true})
+vim.keymap.set('n', '<leader>w', vim.cmd.update, { desc = "Write" })
+vim.keymap.set('n', '<leader>q', ":q<CR>", { desc = "Quit" })
+vim.keymap.set('n', '<leader>pv', vim.cmd.Ex, { desc = "[P]roject [V]iew Folders" })
+vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { silent = true })
 
 vim.keymap.set("n", "J", "mzJ`z")
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
@@ -59,10 +68,13 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', 'gk')
 vim.keymap.set('n', 'j', 'gj')
+vim.keymap.set('n', '<leader><leader>', '<C-w>', { noremap = true })
+
 
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>f?', builtin.oldfiles, { desc = '[?] Find recently opened files' })
 vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = '[F]ind existing [B]uffers' })
+vim.keymap.set('n', '<leader><tab>', builtin.buffers, { desc = "Find in buffer" })
 vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = '[F]ind in [F]iles' })
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = '[F]ind in [H]elp' })
 vim.keymap.set('n', '<leader>fs', builtin.grep_string, { desc = '[F]ind by [S]tring' })
@@ -70,13 +82,12 @@ vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = '[F]ind by [G]rep'
 vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = '[F]ind in [D]iagnostics' })
 
 vim.keymap.set('n', '<leader>gs', vim.cmd.Git)
-vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle)
+vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle, { desc = 'Undotree' })
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+vim.keymap.set('n', '<leader>vd', vim.diagnostic.open_float, { desc = '[V]iew [D]iagnostic message' })
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
@@ -88,4 +99,3 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   group = highlight_group,
   pattern = '*',
 })
-

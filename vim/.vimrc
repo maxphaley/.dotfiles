@@ -25,11 +25,9 @@ set fileformat=unix
 set ignorecase
 set smartcase
 set showcmd
-set hlsearch
+set nohlsearch
 set incsearch
 set hidden
-
-imap <S-Tab> <C-D>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Remap leader to , instead of \
@@ -100,6 +98,22 @@ noremap  <buffer> <silent> j gj
 noremap  <buffer> <silent> <Up> g<Up>
 noremap  <buffer> <silent> <Down> g<Down>
 
+nmap <leader>w :update<CR>
+nmap <leader>q :q<CR>
+nmap <leader>q :q<CR>
+nmap <leader><leader> <C-w>
+
 "Show some whitespace chars
 set list listchars=tab:→\ ,trail:·
 
+
+augroup vimrc-incsearch-highlight
+ autocmd!
+ autocmd CmdlineEnter /,\? :set hlsearch
+ autocmd CmdlineLeave /,\? :set nohlsearch
+augroup end
+
+augroup auto-close-empty-unmodified-bufs
+ autocmd!
+ autocmd BufLeave {} if empty(bufname()) && !&modified | set bufhidden=wipe | endif
+augroup end
