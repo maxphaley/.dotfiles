@@ -47,6 +47,7 @@ vim.cmd [[
 vim.wo.signcolumn = 'yes'
 
 vim.keymap.set('n', '<leader>pv', vim.cmd.Ex)
+vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', {silent = true})
 
 vim.keymap.set("n", "J", "mzJ`z")
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
@@ -87,5 +88,4 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   group = highlight_group,
   pattern = '*',
 })
-
 
