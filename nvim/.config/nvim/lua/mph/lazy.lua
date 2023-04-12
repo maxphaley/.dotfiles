@@ -18,6 +18,7 @@ require('lazy').setup({
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
 
+  'godlygeek/tabular',
   'mbbill/undotree',
 
   -- NOTE: This is where your plugins related to LSP can be installed.

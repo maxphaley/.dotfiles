@@ -1,4 +1,9 @@
 local wk = require("which-key")
+wk.setup({
+  plugins = {
+    registers = false
+  }
+})
 wk.register({
   f = { name = "find" },
   c = { name = "code actions" },
