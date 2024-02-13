@@ -23,6 +23,8 @@ ZSH_THEME="gnzh"
 # Case-sensitive completion must be off. _ and - will be interchangeable.
 # HYPHEN_INSENSITIVE="true"
 
+zstyle ':completion:*' special-dirs false
+
 # Uncomment one of the following lines to change the auto-update behavior
 # zstyle ':omz:update' mode disabled  # disable automatic updates
 # zstyle ':omz:update' mode auto      # update automatically without asking
@@ -100,4 +102,14 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
+#
+if [ -x "$(command -v fzf)" ] && [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh; then
+  if [[ ! "$PATH" == */usr/local/opt/fzf/bin* ]]; then
+    PATH="${PATH:+${PATH}:}/usr/local/opt/fzf/bin"
+  fi
+
+  [ -f  "/usr/local/opt/fzf/shell/completion.zsh" ] && source "/usr/local/opt/fzf/shell/completion.zsh"
+  [ -f  "/usr/local/opt/fzf/shell/key-bindings.zsh" ] && source "/usr/local/opt/fzf/shell/key-bindings.zsh"
+fi
+
 source ~/.zsh_profile
