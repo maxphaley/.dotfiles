@@ -62,3 +62,12 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   pattern = '*',
 })
 
+vim.api.nvim_create_autocmd('BufWritePre', {
+  group = vim.api.nvim_create_augroup('NoTrailingSpace', { clear = true }),
+  pattern = '*',
+  callback = function ()
+    if vim.bo.modifiable and vim.bo.modified then
+      vim.cmd([[%s/\s\+$//e]])
+    end
+  end,
+})
