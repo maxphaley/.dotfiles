@@ -51,6 +51,12 @@ vim.keymap.set('n', '<leader>fc', builtin.commands, { desc = '[F]ind [C]ommand' 
 vim.keymap.set('n', '<leader>gs', vim.cmd.Git)
 vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle, { desc = 'Undotree' })
 
+local trouble = require('trouble')
+vim.keymap.set('n', '<leader>tt', trouble.toggle, { desc = '[T]rouble toggle' })
+vim.keymap.set('n', '<leader>tq', function() trouble.toggle('quickfix') end, { desc = '[T]rouble quickfix' })
+vim.keymap.set('n', ']t', function() trouble.next({skip_groups = true, jump = true }) end, { desc = '[T]rouble jump forwards' })
+vim.keymap.set('n', '[t', function() trouble.previous({skip_groups = true, jump = true }) end, { desc = '[T]rouble jump backwards' })
+
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
