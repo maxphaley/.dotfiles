@@ -4,10 +4,16 @@ return {
     version = '*',
     dependencies = { 'nvim-lua/plenary.nvim' },
     config = function()
+      local find_cmd = nil
+      if vim.fn.executable 'fd' == 1 then
+        find_cmd = {'fd', '--type', 'f', '--hidden', '--exclude', '.git', '--color', 'never'}
+      elseif vim.fn.executable 'rg' == 1 then
+        find_cmd = {'rg', '--files', '--hidden', '--glob', '!.git', '--color', 'never'}
+      end
       require('telescope').setup({
         pickers = {
           find_files = {
-            find_command = { 'rg', '--files', '--hidden', '--glob', '!**/.git/*' }
+            find_command = find_cmd
           }
         },
         defaults = {
@@ -23,7 +29,12 @@ return {
             '-g',
             '!**/.git/*',
           }
-        }
+        },
+        extensions = {
+          fzf = {
+            fuzzy = false,
+          },
+        },
       })
     end
   },
