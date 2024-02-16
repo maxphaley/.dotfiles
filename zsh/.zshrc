@@ -103,13 +103,17 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
 #
-if [ -x "$(command -v fzf)" ] && [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh; then
+if [ -x "$(command -v fzf)" ] ; then
   if [[ ! "$PATH" == */usr/local/opt/fzf/bin* ]]; then
     PATH="${PATH:+${PATH}:}/usr/local/opt/fzf/bin"
   fi
 
   [ -f  "/usr/local/opt/fzf/shell/completion.zsh" ] && source "/usr/local/opt/fzf/shell/completion.zsh"
   [ -f  "/usr/local/opt/fzf/shell/key-bindings.zsh" ] && source "/usr/local/opt/fzf/shell/key-bindings.zsh"
+fi
+
+if [ -x "$(command -v fzf)" ] && [ -x "$(command -v fd)" ] ; then
+  export FZF_DEFAULT_COMMAND="fd --hidden --type f --strip-cwd-prefix --exclude .git"
 fi
 
 source ~/.zsh_profile
