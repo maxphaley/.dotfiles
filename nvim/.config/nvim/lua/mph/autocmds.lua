@@ -1,4 +1,7 @@
+local user_group = vim.api.nvim_create_augroup('mph_group', {})
+
 vim.api.nvim_create_autocmd('VimEnter', {
+  group = user_group,
   pattern = '*',
   callback = function()
     if vim.bo.filetype == 'netrw' then
@@ -8,16 +11,15 @@ vim.api.nvim_create_autocmd('VimEnter', {
   end
 })
 
-local hlsearch_on_type_g = vim.api.nvim_create_augroup('',{ clear = true })
 vim.api.nvim_create_autocmd('CmdlineEnter', {
-  group = hlsearch_on_type_g,
+  group = user_group,
   pattern = '/,\\?',
   callback = function()
     vim.opt.hlsearch = true
   end
 })
 vim.api.nvim_create_autocmd('CmdlineLeave', {
-  group = hlsearch_on_type_g,
+  group = user_group,
   pattern = '/,\\?',
   callback = function()
     vim.opt.hlsearch = false
@@ -25,7 +27,7 @@ vim.api.nvim_create_autocmd('CmdlineLeave', {
 })
 
 vim.api.nvim_create_autocmd('BufLeave', {
-  group = vim.api.nvim_create_augroup('AutoCloseEmptyBuf', { clear = true }),
+  group = user_group,
   pattern = '*',
   callback = function()
     local is_modified = vim.api.nvim_buf_get_option(0, 'modified')
@@ -35,39 +37,68 @@ vim.api.nvim_create_autocmd('BufLeave', {
   end
 })
 
-local rnu_toggle_group = vim.api.nvim_create_augroup('rnu_toggle_group', { clear = true })
 vim.api.nvim_create_autocmd({'BufEnter','FocusGained','InsertLeave','WinEnter'}, {
-  group = rnu_toggle_group,
+  group = user_group,
   pattern = '*',
   callback = function()
-    vim.opt.relativenumber = true
+    if vim.wo.number then
+      vim.opt.relativenumber = true
+    end
   end
 })
 vim.api.nvim_create_autocmd({'BufLeave','FocusLost','InsertEnter','WinLeave'}, {
-  group = rnu_toggle_group,
+  group = user_group,
   pattern = '*',
   callback = function()
-    vim.opt.relativenumber = false
+    if vim.wo.number then
+      vim.opt.relativenumber = false
+    end
   end
 })
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
-local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
+local highlight_group = vim.api.nvim_create_augroup('YankHighlight', {})
 vim.api.nvim_create_autocmd('TextYankPost', {
   callback = function()
-    vim.highlight.on_yank()
+    vim.highlight.on_yank({
+      timeout = 300
+    })
   end,
   group = highlight_group,
   pattern = '*',
 })
 
+local yank_cursor_pos
+vim.api.nvim_create_autocmd({'VimEnter','CursorMoved'}, {
+  group = user_group,
+  pattern = '*',
+  callback = function ()
+    yank_cursor_pos = vim.fn.getpos('.')
+  end,
+})
+vim.api.nvim_create_autocmd('TextYankPost', {
+  group = user_group,
+  pattern = '*',
+  callback = function ()
+    if vim.v.event.operator:lower() == 'y' then
+      vim.fn.setpos('.', yank_cursor_pos)
+    end
+  end,
+})
+
 vim.api.nvim_create_autocmd('BufWritePre', {
-  group = vim.api.nvim_create_augroup('NoTrailingSpace', { clear = true }),
+  group = user_group,
   pattern = '*',
   callback = function ()
     if vim.bo.modifiable and vim.bo.modified then
       vim.cmd([[%s/\s\+$//e]])
     end
   end,
+})
+
+vim.api.nvim_create_autocmd('FileType', {
+  group = user_group,
+  pattern = 'help',
+  command = "wincmd H"
 })
