@@ -102,3 +102,15 @@ vim.api.nvim_create_autocmd('FileType', {
   pattern = 'help',
   command = "wincmd H"
 })
+
+vim.api.nvim_create_autocmd('TermOpen', {
+  group = user_group,
+  pattern = '*',
+  command = 'startinsert'
+})
+
+vim.api.nvim_create_autocmd('FileType', {
+  group = user_group,
+  pattern = {'gitcommit', 'gitrebase'},
+  command = 'startinsert | 1'
+})
