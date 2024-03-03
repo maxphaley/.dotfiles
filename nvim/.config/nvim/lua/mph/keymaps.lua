@@ -47,6 +47,7 @@ vim.keymap.set('n', '<leader>fs', builtin.grep_string, { desc = '[F]ind by [S]tr
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = '[F]ind by [G]rep' })
 vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = '[F]ind in [D]iagnostics' })
 vim.keymap.set('n', '<leader>fc', builtin.commands, { desc = '[F]ind [C]ommand' })
+vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = '[F]ind [K]eymaps' })
 
 vim.keymap.set('n', '<leader>gs', vim.cmd.Git)
 vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle, { desc = 'Undotree' })
