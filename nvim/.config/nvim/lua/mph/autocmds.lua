@@ -30,8 +30,9 @@ vim.api.nvim_create_autocmd('BufLeave', {
   group = user_group,
   pattern = '*',
   callback = function()
-    local is_modified = vim.api.nvim_buf_get_option(0, 'modified')
-    if vim.fn.empty(vim.fn.bufname()) and not is_modified then
+    if vim.bo.modified or not vim.bo.buflisted then return end
+    local bufname = vim.fn.bufname(0)
+    if bufname == nil or bufname == '' then
       vim.opt.bufhidden = 'wipe'
     end
   end
