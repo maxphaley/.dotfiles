@@ -1,5 +1,19 @@
 local user_group = vim.api.nvim_create_augroup('mph_group', {})
 
+vim.api.nvim_create_autocmd('BufReadPost', {
+  group = user_group,
+  callback = function()
+    local skip = string.match(vim.bo.filetype, 'fugitive|gitcommit|gitrebase')
+    if skip == nil then
+      local jmpln = vim.fn.line([['"]])
+      local jmpbnd = jmpln > 1 and jmpln < vim.fn.line('$')
+      if jmpbnd then
+        vim.cmd([[normal! g`"]])
+      end
+    end
+  end
+})
+
 vim.api.nvim_create_autocmd('VimEnter', {
   group = user_group,
   pattern = '*',
@@ -30,9 +44,11 @@ vim.api.nvim_create_autocmd('BufLeave', {
   group = user_group,
   pattern = '*',
   callback = function()
-    if vim.bo.modified or not vim.bo.buflisted then return end
-    local bufname = vim.fn.bufname(0)
-    if bufname == nil or bufname == '' then
+    if vim.api.nvim_buf_get_option(0, 'modified') then return end
+    if not vim.fn.buflisted(0) then return end
+    local bufname = vim.api.nvim_buf_get_name(0)
+    local is_no_name = bufname == nil or bufname == ''
+    if is_no_name then
       vim.opt.bufhidden = 'wipe'
     end
   end

@@ -43,4 +43,3 @@ vim.opt.inccommand = 'split'
 
 vim.g.netrw_bufsettings = 'noma nomod nobl nowrap ro nornu nu'
 vim.g.netrw_browse_split = 0
-vim.g.netrw_liststyle = 3

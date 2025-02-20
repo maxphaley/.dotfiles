@@ -8,16 +8,14 @@ return {
         registers = false,
       },
     },
-    config = function()
-      require('which-key').register({
-        f = { name = 'find' },
-        c = { name = 'code actions' },
-        p = { name = 'project' },
-        s = { name = 'symbols' },
-        g = { name = 'git' },
-        v = { name = 'view' },
-      }, { prefix = '<leader>' })
-    end
+    keys = {
+      { "<leader>f", group = "find" },
+      { "<leader>c", group = "code actions" },
+      { "<leader>p", group = "project" },
+      { "<leader>s", group = "symbols" },
+      { "<leader>g", group = "git" },
+      { "<leader>v", group = "view" },
+    }
   },
 
   'godlygeek/tabular',

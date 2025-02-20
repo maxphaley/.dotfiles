@@ -30,7 +30,7 @@ return {
         { name = 'luasnip' },
       }),
       mapping = cmp.mapping.preset.insert({
-        ['<cr>'] = cmp.mapping.confirm({select = true}),
+        ['<C-y>'] = cmp.mapping.confirm({select = true}),
         ['<C-Space>'] = cmp.mapping.complete(),
         ['<C-p>'] = cmp.mapping.select_prev_item(),
         ['<C-n>'] = cmp.mapping.select_next_item(),
