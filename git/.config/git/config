@@ -1,12 +1,23 @@
 [user]
   name = Max P Haley
   email = maxphaley@users.noreply.github.com
+[core]
+  pager = less -FRi
 [push]
   default = simple
-[core]
-	pager = less -FRS
+[pull]
+  ff = only
 [init]
   defaultBranch = main
+[commit]
+  verbose = true
+[diff]
+  colorMoved = true
+  mnemonicPrefix = true
+  algorithm = histogram
+[fetch]
+  prune = true
+  writeCommitGraph = true
 [alias]
   br = branch
   co = checkout
