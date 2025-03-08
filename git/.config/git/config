@@ -3,21 +3,34 @@
   email = maxphaley@users.noreply.github.com
 [core]
   pager = less -FRi
+  autocrlf = false
+  eol = lf
 [push]
   default = simple
 [pull]
   ff = only
+[rebase]
+  autoSquash = true
+  autoStash = true
 [init]
   defaultBranch = main
+[branch]
+  sort = -committerdate
 [commit]
   verbose = true
+[log]
+  abbrevCommit = true
+  follow = true
 [diff]
   colorMoved = true
   mnemonicPrefix = true
   algorithm = histogram
+  submodule = log
 [fetch]
   prune = true
   writeCommitGraph = true
+[tag]
+  sort = v:refname
 [alias]
   br = branch
   co = checkout
