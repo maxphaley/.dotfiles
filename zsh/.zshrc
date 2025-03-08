@@ -76,6 +76,8 @@ plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
+unalias gcm
+
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -84,12 +86,7 @@ source $ZSH/oh-my-zsh.sh
 export EDITOR='vim'
 
 if [ -x "$(command -v fzf)" ] ; then
-  if [[ ! "$PATH" == */usr/local/opt/fzf/bin* ]]; then
-    PATH="${PATH:+${PATH}:}/usr/local/opt/fzf/bin"
-  fi
-
-  [ -f  "/usr/local/opt/fzf/shell/completion.zsh" ] && source "/usr/local/opt/fzf/shell/completion.zsh"
-  [ -f  "/usr/local/opt/fzf/shell/key-bindings.zsh" ] && source "/usr/local/opt/fzf/shell/key-bindings.zsh"
+  source <(fzf --zsh)
 fi
 
 if [ -x "$(command -v fzf)" ] && [ -x "$(command -v fd)" ] ; then
