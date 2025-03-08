@@ -90,17 +90,4 @@ M.lsp_keymaps = function(bufnr)
   nmap('<leader>s?', vim.lsp.buf.signature_help, '[S]ignature [?]Documentation')
 end
 
--- harpoon keymaps
-local harpoon = require('harpoon')
-vim.keymap.set('n', '<leader>hv', function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, { desc = '[H]arpoon toggle list' })
-vim.keymap.set('n', '<leader>hh', function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, { desc = '[H]arpoon toggle list' })
-vim.keymap.set('n', '<leader>ha', function() harpoon:list():append() end, { desc = '[H]arpoon append file to list' })
-vim.keymap.set('n', '<leader>hx', function() harpoon:list():remove() end, { desc = '[H]arpoon remove file from list' })
-vim.keymap.set('n', '<leader>hn', function() harpoon:list():next() end, { desc = '[H]arpoon remove file from list' })
-vim.keymap.set('n', '<leader>hp', function() harpoon:list():prev() end, { desc = '[H]arpoon remove file from list' })
-vim.keymap.set('n', '<leader>hr', function() harpoon:list():clear() end, { desc = '[H]arpoon reset lear the list' })
-for hi = 1, 9 do
-  vim.keymap.set('n', '<leader>' .. hi, function() harpoon:list():select(hi) end, { desc = '[H]arpoon goto ' .. hi })
-end
-
 return M
