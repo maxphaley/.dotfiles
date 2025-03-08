@@ -25,21 +25,6 @@ vim.api.nvim_create_autocmd('VimEnter', {
   end
 })
 
-vim.api.nvim_create_autocmd('CmdlineEnter', {
-  group = user_group,
-  pattern = '/,\\?',
-  callback = function()
-    vim.opt.hlsearch = true
-  end
-})
-vim.api.nvim_create_autocmd('CmdlineLeave', {
-  group = user_group,
-  pattern = '/,\\?',
-  callback = function()
-    vim.opt.hlsearch = false
-  end
-})
-
 vim.api.nvim_create_autocmd('BufLeave', {
   group = user_group,
   pattern = '*',

@@ -33,7 +33,7 @@ vim.opt.timeoutlen = 300
 
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
-vim.opt.hlsearch = false
+vim.opt.hlsearch = true
 vim.opt.incsearch = true
 
 vim.opt.splitright = true
