@@ -5,6 +5,7 @@
   pager = less -FRi
   autocrlf = false
   eol = lf
+  fscache = true
 [push]
   default = simple
 [pull]
@@ -31,6 +32,10 @@
   writeCommitGraph = true
 [tag]
   sort = v:refname
+[merge]
+  tool = fugitive
+[mergetool "fugitive"]
+  cmd = nvim -f -c "Gvdiffsplit!" "$MERGED"
 [alias]
   br = branch
   co = checkout

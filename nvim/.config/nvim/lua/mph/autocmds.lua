@@ -30,7 +30,7 @@ vim.api.nvim_create_autocmd('BufLeave', {
   pattern = '*',
   callback = function()
     if vim.api.nvim_buf_get_option(0, 'modified') then return end
-    if not vim.fn.buflisted(0) then return end
+    if not vim.bo.buflisted then return end
     local bufname = vim.api.nvim_buf_get_name(0)
     local is_no_name = bufname == nil or bufname == ''
     if is_no_name then
@@ -111,8 +111,3 @@ vim.api.nvim_create_autocmd('TermOpen', {
   command = 'startinsert'
 })
 
-vim.api.nvim_create_autocmd('FileType', {
-  group = user_group,
-  pattern = {'gitcommit', 'gitrebase'},
-  command = 'startinsert | 1'
-})
