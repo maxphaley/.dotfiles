@@ -17,6 +17,8 @@
   defaultBranch = main
 [branch]
   sort = -committerdate
+  autosetupmerge = always
+  autosetuprebase = always
 [commit]
   verbose = true
 [log]

@@ -41,7 +41,6 @@ vim.opt.splitright = true
 
 vim.opt.inccommand = 'split'
 
-vim.opt.modeline = false
 vim.opt.fileformat = 'unix'
 vim.opt.fileformats = 'unix'
 
